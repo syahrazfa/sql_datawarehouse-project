@@ -1,10 +1,10 @@
 -- PURPOSE:
--- This script ingest datasets in default format or marketting format
+-- This script ingest datasets in default format or marketing format
 -- Marketing format consists of currency symbol, percentage, and other symbols that can't be loaded as numeric
 --
 -- Can be executed multiple times depend on the correction
 
--- Staging the table first into marketting format
+-- Staging the table first into marketing format
 
 DROP TABLE IF EXISTS bronze.products_stage;
 
@@ -26,3 +26,10 @@ CREATE TABLE IF NOT EXISTS bronze.products_stage (
 	img_link text,
 	product_link text
 );
+
+COPY bronze.products_stage
+FROM 'amazon.csv'
+DELIMITER ','
+CSV HEADER;
+
+SELECT COUNT(*) FROM bronze.products_stage;
